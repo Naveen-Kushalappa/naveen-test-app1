@@ -1,21 +1,31 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
 import './App.css'
-import Test from "./Pages/Test.jsx";
+import Circle from "./Pages/Circle.jsx";
+import {useRef} from "react";
+import UserForm from "@/Pages/userForm.jsx";
 
 const App = () => {
-  // const [count, setCount] = useState(0)
+
+    const myRef = useRef();
+    const circleRef = useRef();
+    const mouseMovedHandler = (e) => {
+        const circle = circleRef.current;
+        setTimeout(() => {
+            circle.style.left = e.clientX + "px";
+            circle.style.top = e.clientY + "px";
+        }, 100)
+    };
 
     return (
-        <Test/>
+
+        <>
+        <UserForm></UserForm>
+        <div ref={myRef} onMouseMove={mouseMovedHandler} >
+            <div className="h-screen relative">
+             <Circle ref={circleRef} />
+            </div>
+        </div>
+            </>
     )
-  // return (
-  //     <>
-  //        <h2>this is a test</h2>
-  //        {/*<Test></Test>*/}
-  //     </>
-  // )
 }
 
 export default App
